@@ -1,0 +1,14 @@
+{
+  "name": "vehicles-server",
+  "version": "1.0.0",
+  "description": "api with CRUD to manage vehicles",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ."
+  },
+  "author": "vehicles",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.18.1"
+  }
+}

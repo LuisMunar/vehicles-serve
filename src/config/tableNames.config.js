@@ -1,5 +1,6 @@
 const tableNames = {
-  VEHICLE: 'vehicle'
+  VEHICLE: 'vehicle',
+  DRIVER: 'driver'
 }
 
 module.exports = tableNames

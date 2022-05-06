@@ -16,7 +16,12 @@ const getPaginatorData = (data, page, limit) => {
   }
 }
 
+const setFormatResponse = (res, statusCode, result) => {
+  res.status(statusCode).json({ result })
+}
+
 module.exports = {
   getPaginatorParams,
-  getPaginatorData
+  getPaginatorData,
+  setFormatResponse
 }

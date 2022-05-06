@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator')
 
 const { VehicleModel } = require('../../models')
 const { getPaginatorParams, getPaginatorData } = require('../../helpers')
+const db = require('../../models')
 
 const getVehicles = async (req, res, next) => {
   try {
@@ -18,6 +19,9 @@ const getVehicles = async (req, res, next) => {
       order: [['id', 'ASC']],
       limit,
       offset,
+      include: {
+        model: db.DriverModel
+      },
       where: user ? { driver_id: user } : {}
     })
 

@@ -36,5 +36,13 @@ module.exports = (sequelize, Sequelize) => {
     }
   )
 
+  const DriverModel = require('./driver.model')(sequelize, Sequelize)
+  VehicleModel.hasOne(DriverModel, {
+    foreignKey: 'id'
+  })
+  VehicleModel.belongsTo(DriverModel, {
+    foreignKey: 'id'
+  })
+
   return VehicleModel
 }

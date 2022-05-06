@@ -6,7 +6,8 @@ module.exports = (sequelize, Sequelize) => {
     {
       id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoincrement: true
       },
       driver_id: {
         type: Sequelize.INTEGER

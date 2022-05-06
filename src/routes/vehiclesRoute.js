@@ -37,6 +37,12 @@ router.put(
   ],
   updateVehicle
 )
-router.delete('/:id', deleteVehicle)
+router.delete(
+  '/',
+  [
+    check('id').notEmpty()
+  ],
+  deleteVehicle
+)
 
 module.exports = router

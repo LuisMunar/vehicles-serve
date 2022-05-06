@@ -3,8 +3,8 @@ const cors = require('cors')
 
 const routes = require('./src/routes')
 const db = require('./src/models')
+const { SERVER_PORT } = require('./src/config/environments.config')
 
-const port = 8000
 const corsOptions = {origin: ['http://localhost:3000']}
 
 const app = express()
@@ -13,4 +13,4 @@ app.use(express.json({ extended: true }))
 routes(app)
 db.sequelize
 
-app.listen(port, () => console.log(`Server running on port ${ port }`))
+app.listen(SERVER_PORT, () => console.log(`Server running on port ${ SERVER_PORT }`))

@@ -1,8 +1,10 @@
+const { HOST_DB, USER_DB, PASSWORD_DB, DB } = require('./environments.config')
+
 const dbConfig = {
-  HOST: 'shippify-hiring.cv2sgxogwffx.sa-east-1.rds.amazonaws.com',
-  USER: 'candidate5',
-  PASSWORD: 'ubnpS3rySnj88Sum',
-  DB: 'shippify5',
+  HOST_DB,
+  USER_DB,
+  PASSWORD_DB,
+  DB,
   DIALECT: 'mysql'
 }
 

@@ -8,11 +8,13 @@ const updateVehicle = require('../controllers/vehicles/updateVehicle')
 const deleteVehicle = require('../controllers/vehicles/deleteVehicle')
 
 const router = express.Router()
-router.get('/', getVehicles)
 router.get(
-  '/:user',
-  [check('user').notEmpty()],
-  getVehicleByUser
+  '/',
+  [
+    check('page').notEmpty(),
+    check('size').notEmpty()
+  ],
+  getVehicles
 )
 router.post('/', createVehicle)
 router.put('/:id', updateVehicle)

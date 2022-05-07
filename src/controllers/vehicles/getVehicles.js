@@ -12,8 +12,37 @@ const getVehicles = async (req, res, next) => {
       return
     }
 
-    const { page, size, driver_id } = req.query
+    const { page, size, drivers_id } = req.query
     const { limit, offset } = getPaginatorParams(page, size)
+    
+    if(drivers_id) {
+      const formatArrayDriversId = JSON.parse(drivers_id)
+      const getDriversPromisesArray = []
+
+      formatArrayDriversId.forEach((driverId, i) => {
+        getDriversPromisesArray.push(
+          VehicleModel.findAndCountAll({
+            order: [['id', 'ASC']],
+            limit,
+            offset,
+            include: {
+              model: db.DriverModel
+            },
+            where: {
+              driver_id: driverId
+            }
+          })
+        )
+      })
+
+      const promisesResult = await Promise.allSettled(getDriversPromisesArray)
+      const result = promisesResult
+        .map(({ value }) => value)
+        .reduce((prevItem, nextItem) => ({ count: prevItem.count+nextItem.count, rows: [...prevItem.rows, ...nextItem.rows] }))
+
+      setFormatResponse(res, 200, getPaginatorData(result, page, limit))
+      return
+    }
 
     const result = await VehicleModel.findAndCountAll({
       order: [['id', 'ASC']],
@@ -21,10 +50,9 @@ const getVehicles = async (req, res, next) => {
       offset,
       include: {
         model: db.DriverModel
-      },
-      where: driver_id ? { driver_id } : {}
+      }
     })
-
+    
     setFormatResponse(res, 200, getPaginatorData(result, page, limit))
   } catch (error) {
     next(error)

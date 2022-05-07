@@ -12,7 +12,7 @@ const getVehicles = async (req, res, next) => {
       return
     }
 
-    const { query: { page, size, user } } = req
+    const { page, size, driver_id } = req.query
     const { limit, offset } = getPaginatorParams(page, size)
 
     const result = await VehicleModel.findAndCountAll({
@@ -22,7 +22,7 @@ const getVehicles = async (req, res, next) => {
       include: {
         model: db.DriverModel
       },
-      where: user ? { driver_id: user } : {}
+      where: driver_id ? { driver_id } : {}
     })
 
     setFormatResponse(res, 200, getPaginatorData(result, page, limit))

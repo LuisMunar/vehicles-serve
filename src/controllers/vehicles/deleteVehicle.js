@@ -17,7 +17,7 @@ const deleteVehicle = async (req, res, next) => {
       setFormatResponse(res, 400, 'Vehicle does not exist')
     }
 
-    const result = await vehicle.destroy()
+    await vehicle.destroy()
     setFormatResponse(res, 204)
   } catch (error) {
     next(error)

@@ -38,10 +38,12 @@ module.exports = (sequelize, Sequelize) => {
 
   const DriverModel = require('./driver.model')(sequelize, Sequelize)
   VehicleModel.hasOne(DriverModel, {
-    foreignKey: 'id'
+    foreignKey: 'driver_id',
+    sourceKey: 'id'
   })
   VehicleModel.belongsTo(DriverModel, {
-    foreignKey: 'id'
+    foreignKey: 'driver_id',
+    targetId: 'id'
   })
 
   return VehicleModel

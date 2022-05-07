@@ -11,15 +11,15 @@ const deleteVehicle = async (req, res, next) => {
     }
 
     const { id } = req.query
-    const vehicle = await VehicleModel.findOne({ where: { id } })
+    const vehicle = await VehicleModel.findByPk(id)
+
     if(!vehicle) {
       setFormatResponse(res, 400, 'Vehicle does not exist')
     }
 
-    const result = await VehicleModel.destroy({ where: { id } })
-    setFormatResponse(res, 200, result)
+    const result = await vehicle.destroy()
+    setFormatResponse(res, 204)
   } catch (error) {
-    console.log(error)
     next(error)
   }
 }

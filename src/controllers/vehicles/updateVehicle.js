@@ -9,10 +9,9 @@ const updateVehicle = async (req, res) => {
       setFormatResponse(res, 400, errors)
       return
     }
-    
-    const { body } = req
-    const { id, plate, model, type, capacity } = body
-    const vehicle = await VehicleModel.findOne({ where: { id } })
+
+    const { id, plate, model, type, capacity } = req.body
+    const vehicle = await VehicleModel.findByPk(id)
 
     if(!vehicle) {
       setFormatResponse(res, 400, 'Vehicle does not exist')
